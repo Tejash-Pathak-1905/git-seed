@@ -2,6 +2,8 @@
 
 Automatically configure Git so **every repository you clone or create** automatically keeps your Graphify knowledge graph and lightweight wiki updated in the background, without needing to configure each repo individually.
 
+It is a one-time setup: just clone, run setup, and forget it.
+
 Paired with **Antigravity**, this cuts agent token consumption and reading time by 70%–90% by replacing whole-file reads with targeted graph queries.
 
 Works seamlessly on **Windows**, **macOS**, and **Linux**.
