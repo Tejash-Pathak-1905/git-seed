@@ -102,9 +102,9 @@ chmod +x setup.sh
 Pick the flags you want:
 
 - **`--graphify`**: Automatically updates your codebase knowledge graph and lightweight markdown wiki (`graphify-out/wiki/index.md`) in the background on commit or branch switch.
-  - **Antigravity Optimization:** Built specifically to pair with AI coding environments like **Antigravity** (via `.agents/rules/`). Instead of agents burning tens of thousands of tokens blindly reading entire source files, agents query the pre-indexed graph and wiki, slashing token usage by 70%–90% and speeding up response times.
-  - **Zero Overhead / Graceful Fallback:** If `graphify` is not installed or `graphify-out/` is not initialized, the hook silently skips with zero impact. If Antigravity is not in use, `.agents/` remains completely passive text files—nothing breaks or blocks your workflow.
-  > **Note:** Initial graphification requires running `graphify . && graphify export wiki` once inside the repository to generate `graphify-out/`. After that, `git-seed` keeps it in sync automatically.
+  - **Antigravity Optimization:** If Antigravity is detected, setup automatically configures your global agent rule in `~/.gemini/config/GEMINI.md`. Instead of burning tens of thousands of tokens blindly reading entire source files, agents query the pre-indexed graph and wiki—slashing token consumption and latency by 70%–90% across all your projects without needing a per-repo `.agents` folder.
+  - **Zero Overhead / Graceful Fallback:** If `graphify` is not installed or a repository has not been initialized with `graphify-out/`, the hook silently skips with zero impact on Git commits.
+  > **Note:** Initial graphification in any target project requires running `graphify . && graphify export wiki` once to generate `graphify-out/`. After that, `git-seed` keeps it in sync automatically.
 - **`--secret-guard`**: Stops you from accidentally committing API keys, tokens, or private SSH keys.
 - **`--branch-guard`**: Stops you from accidentally committing directly to `main` or `master`.
 - **`--large-file-guard`**: Blocks files over 25MB before you commit (stops GitHub push rejections).

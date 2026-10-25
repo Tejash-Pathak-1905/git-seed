@@ -173,6 +173,31 @@ fi
 EOF
     chmod +x "${HOOKS_DIR}/post-checkout.d/10-graphify.sh" 2>/dev/null || true
     print_success "Recipe 'graphify' enabled in post-commit.d and post-checkout.d (AST graph + wiki auto-export)."
+
+    # Optional Antigravity global optimization
+    local gemini_config="${USER_HOME}/.gemini/config"
+    if [ -d "${gemini_config}" ]; then
+        local gemini_rules="${gemini_config}/GEMINI.md"
+        if [ -f "${gemini_rules}" ] && grep -Fq "graphify-out" "${gemini_rules}" 2>/dev/null; then
+            print_success "Global Antigravity rule already configured in ${gemini_rules}."
+        else
+            print_info "Antigravity detected! Installing global token-conservation rule..."
+            cat << 'EOF' >> "${gemini_rules}"
+
+# Global Antigravity Rules
+
+## Codebase Exploration & Token Conservation
+Whenever a repository has a `graphify-out/` folder:
+1. **NEVER do blind whole-file reads or wide text searches** (e.g. `grep`, `Select-String`, or viewing 500+ lines) to explore code architecture, understand relationships, or find definitions.
+2. **First step for architecture & navigation:** Read `graphify-out/wiki/index.md` (~400 tokens) or run `graphify query "<query>" --budget 1200`.
+3. **Tracing flows & connections:** Run `graphify path "<SymbolA>" "<SymbolB>"` to trace dependencies or data flow.
+4. **Inspecting load-bearing components:** Run `graphify explain "<Symbol>"`.
+5. **Surgical reading only:** When `graphify query` returns exact file paths and line numbers, use `read_file` strictly with `StartLine` and `EndLine` for the target function or block. Do NOT read the entire file.
+6. **Keep graph in sync:** Run `graphify update . && graphify export wiki` after modifying code structure.
+EOF
+            print_success "Global Antigravity rule configured in ${gemini_rules} (no per-repo .agents folder needed)."
+        fi
+    fi
 }
 
 install_recipe_secret_guard() {
