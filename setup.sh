@@ -157,8 +157,8 @@ install_recipe_graphify() {
 # [git-seed] graphify auto-rebuild post-commit hook
 # Only runs if graphify is installed and graphify-out exists
 if [ -d "graphify-out" ] && command -v graphify >/dev/null 2>&1; then
-    # Run in background to prevent blocking git commit
-    (graphify update . >/dev/null 2>&1 &) || true
+    # Run graph update and wiki export in background to prevent blocking git commit
+    (graphify update . >/dev/null 2>&1 && graphify export wiki >/dev/null 2>&1 &) || true
 fi
 EOF
     chmod +x "${HOOKS_DIR}/post-commit.d/10-graphify.sh" 2>/dev/null || true
@@ -168,11 +168,11 @@ EOF
 #!/usr/bin/env bash
 # [git-seed] graphify auto-sync post-checkout hook
 if [ -d "graphify-out" ] && command -v graphify >/dev/null 2>&1; then
-    (graphify update . >/dev/null 2>&1 &) || true
+    (graphify update . >/dev/null 2>&1 && graphify export wiki >/dev/null 2>&1 &) || true
 fi
 EOF
     chmod +x "${HOOKS_DIR}/post-checkout.d/10-graphify.sh" 2>/dev/null || true
-    print_success "Recipe 'graphify' enabled in post-commit.d and post-checkout.d."
+    print_success "Recipe 'graphify' enabled in post-commit.d and post-checkout.d (AST graph + wiki auto-export)."
 }
 
 install_recipe_secret_guard() {
@@ -350,7 +350,7 @@ Usage:
   .\setup.ps1 [OPTIONS / RECIPES]  (Windows PowerShell)
 
 Curated Tool Recipes:
-  --graphify            Auto-rebuild knowledge graph on commit/checkout in background (0 API cost)
+  --graphify            Auto-rebuild knowledge graph & wiki on commit/checkout in background (0 API cost)
   --secret-guard        Pre-commit check: blocks staged AWS keys, GitHub tokens, and private keys
   --branch-guard        Pre-commit check: prevents accidental direct commits to 'main' or 'master'
   --large-file-guard    Pre-commit check: blocks files exceeding 25MB (prevents GitHub push rejections)

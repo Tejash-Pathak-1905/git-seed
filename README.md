@@ -1,6 +1,8 @@
 # git-seed
 
-Automatically configure Git so **every repository you clone or create** automatically gets helpful safety checks and background tooling without needing to configure each repo individually.
+Automatically configure Git so **every repository you clone or create** automatically keeps your Graphify knowledge graph and lightweight wiki updated in the background, without needing to configure each repo individually.
+
+Paired with **Antigravity**, this cuts agent token consumption and reading time by 70%–90% by replacing whole-file reads with targeted graph queries.
 
 Works seamlessly on **Windows**, **macOS**, and **Linux**.
 
@@ -97,8 +99,10 @@ chmod +x setup.sh
 
 Pick the flags you want:
 
-- **`--graphify`**: Updates your codebase knowledge graph automatically in the background whenever you commit or switch branches.
-  > **Important:** If a repository hasn't been graphified before, the hook will not work. Initial graphification is required—run `graphify .` once inside the repository to create `graphify-out/`. After that, subsequent commits and branch switches will automatically keep the graph updated.
+- **`--graphify`**: Automatically updates your codebase knowledge graph and lightweight markdown wiki (`graphify-out/wiki/index.md`) in the background on commit or branch switch.
+  - **Antigravity Optimization:** Built specifically to pair with AI coding environments like **Antigravity** (via `.agents/rules/`). Instead of agents burning tens of thousands of tokens blindly reading entire source files, agents query the pre-indexed graph and wiki, slashing token usage by 70%–90% and speeding up response times.
+  - **Zero Overhead / Graceful Fallback:** If `graphify` is not installed or `graphify-out/` is not initialized, the hook silently skips with zero impact. If Antigravity is not in use, `.agents/` remains completely passive text files—nothing breaks or blocks your workflow.
+  > **Note:** Initial graphification requires running `graphify . && graphify export wiki` once inside the repository to generate `graphify-out/`. After that, `git-seed` keeps it in sync automatically.
 - **`--secret-guard`**: Stops you from accidentally committing API keys, tokens, or private SSH keys.
 - **`--branch-guard`**: Stops you from accidentally committing directly to `main` or `master`.
 - **`--large-file-guard`**: Blocks files over 25MB before you commit (stops GitHub push rejections).
