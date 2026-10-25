@@ -6,35 +6,90 @@ Works seamlessly on **Windows**, **macOS**, and **Linux**.
 
 ---
 
-## Quick Start
+## Installation & Setup
 
-Clone this repository, open your terminal inside the folder, and run:
+Choose your operating system below for complete, step-by-step instructions from cloning to execution:
 
-### Windows (PowerShell)
+### 🪟 Windows
+
+> **Prerequisite:** Ensure [Git for Windows](https://git-scm.com/) is installed.
+
+#### Option A: PowerShell (Recommended)
+Open **PowerShell** and run:
+
 ```powershell
+# 1. Clone the repository
+git clone https://github.com/Tejash-Pathak-1905/git-seed.git
+
+# 2. Navigate into the repository folder
+cd git-seed
+
+# 3. Run setup with your desired recipes (e.g., --graphify or --all)
 .\setup.ps1 --graphify
 ```
 
-### macOS, Linux, and Git Bash
+> *Tip:* If your system restricts PowerShell script execution, run:
+> ```powershell
+> powershell -ExecutionPolicy Bypass -File .\setup.ps1 --graphify
+> ```
+
+#### Option B: Git Bash
+If you prefer **Git Bash**, open it and run:
+
 ```bash
+# 1. Clone the repository
+git clone https://github.com/Tejash-Pathak-1905/git-seed.git
+
+# 2. Navigate into the repository folder
+cd git-seed
+
+# 3. Run setup
 ./setup.sh --graphify
 ```
 
-*(You can also use `--all` to enable all developer guard checks at once)*
+---
+
+### 🍎 macOS
+
+> **Prerequisite:** Ensure Git is installed (`git --version`). If not already installed, running `git` will prompt you to install Xcode Command Line Tools.
+
+Open **Terminal** and run:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/Tejash-Pathak-1905/git-seed.git
+
+# 2. Navigate into the repository folder
+cd git-seed
+
+# 3. Grant execute permissions to the setup script
+chmod +x setup.sh
+
+# 4. Run setup with your desired recipes (e.g., --graphify or --all)
+./setup.sh --graphify
+```
 
 ---
 
-## Applying to Existing Repositories
+### 🐧 Linux
 
-New repositories (`git clone` / `git init`) inherit these hooks automatically.
+> **Prerequisite:** Ensure Git and Bash are installed (e.g. `sudo apt install git` on Debian/Ubuntu or `sudo dnf install git` on Fedora/RHEL).
 
-If you have an **already existing repository** on your computer and want to bring in the new hooks, simply open your terminal in that repository and run:
+Open your **Terminal** and run:
 
 ```bash
-git init
-```
+# 1. Clone the repository
+git clone https://github.com/Tejash-Pathak-1905/git-seed.git
 
-> **Safe to run:** Running `git init` on an existing repository will **not** touch your code, commits, or branches. Git will simply re-apply your template hooks into `.git/hooks/`.
+# 2. Navigate into the repository folder
+cd git-seed
+
+# 3. Grant execute permissions to the setup script
+chmod +x setup.sh
+
+# 4. Run setup with your desired recipes (e.g., --graphify or --all)
+./setup.sh --graphify
+```
 
 ---
 
@@ -52,11 +107,25 @@ Pick the flags you want:
 
 ---
 
+## Applying to Existing Repositories
+
+New repositories (`git clone` / `git init`) inherit these hooks automatically.
+
+If you have an **already existing repository** on your computer and want to bring in the new hooks, simply open your terminal in that repository and run:
+
+```bash
+git init
+```
+
+> **Safe to run:** Running `git init` on an existing repository will **not** touch your code, commits, or branches. Git will simply re-apply your template hooks into `.git/hooks/`.
+
+---
+
 ## Helpful Commands
 
 - **Check what's currently active:**
-  - Windows: `.\setup.ps1 --status`
-  - macOS / Linux: `./setup.sh --status`
+  - Windows (PowerShell): `.\setup.ps1 --status`
+  - macOS / Linux / Git Bash: `./setup.sh --status`
 
 - **Need to bypass a check for one commit?**
   ```bash
@@ -64,5 +133,5 @@ Pick the flags you want:
   ```
 
 - **Want to turn it off?**
-  - Windows: `.\setup.ps1 --uninstall`
-  - macOS / Linux: `./setup.sh --uninstall`
+  - Windows (PowerShell): `.\setup.ps1 --uninstall`
+  - macOS / Linux / Git Bash: `./setup.sh --uninstall`
