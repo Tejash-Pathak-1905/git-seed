@@ -43,6 +43,7 @@ git init
 Pick the flags you want:
 
 - **`--graphify`**: Updates your codebase knowledge graph automatically in the background whenever you commit or switch branches.
+  > **Important:** If a repository hasn't been graphified before, the hook will not work. Initial graphification is required—run `graphify .` once inside the repository to create `graphify-out/`. After that, subsequent commits and branch switches will automatically keep the graph updated.
 - **`--secret-guard`**: Stops you from accidentally committing API keys, tokens, or private SSH keys.
 - **`--branch-guard`**: Stops you from accidentally committing directly to `main` or `master`.
 - **`--large-file-guard`**: Blocks files over 25MB before you commit (stops GitHub push rejections).
